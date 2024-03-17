@@ -4,3 +4,9 @@ C:\Users\soqohm\source\repos\ACD-2\obj\Debug\ACD-2.csproj.AssemblyReference.cach
 C:\Users\soqohm\source\repos\ACD-2\obj\Debug\ACD-2.csproj.CoreCompileInputs.cache
 C:\Users\soqohm\source\repos\ACD-2\obj\Debug\ACD-2.exe
 C:\Users\soqohm\source\repos\ACD-2\obj\Debug\ACD-2.pdb
+C:\Users\soqohm\Documents\GitHub\ACD-2\bin\Debug\ACD-2.exe
+C:\Users\soqohm\Documents\GitHub\ACD-2\bin\Debug\ACD-2.pdb
+C:\Users\soqohm\Documents\GitHub\ACD-2\obj\Debug\ACD-2.csproj.AssemblyReference.cache
+C:\Users\soqohm\Documents\GitHub\ACD-2\obj\Debug\ACD-2.csproj.CoreCompileInputs.cache
+C:\Users\soqohm\Documents\GitHub\ACD-2\obj\Debug\ACD-2.exe
+C:\Users\soqohm\Documents\GitHub\ACD-2\obj\Debug\ACD-2.pdb
