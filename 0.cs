@@ -67,7 +67,7 @@ namespace AlgorithmsDataStructures
 
         // Печать элементов списка с четными индексами
 
-        //public static void PrintOnlyEvenElements<T>(LinkedList<T> list) // предыдущая версия
+        //public static void PrintOnlyEvenElements<T>(LinkedList<T> list) // предыдущая версия 1
         //{
         //    void Print(LinkedListNode<T> node, bool isEvenIndex)
         //    {
@@ -78,15 +78,26 @@ namespace AlgorithmsDataStructures
         //    Print(list.First, false);
         //}
 
+        //public static void PrintOnlyEvenElements<T>(List<T> list) // предыдущая версия 2
+        //{
+        //    void Print(int index)
+        //    {
+        //        if (index + 1 > list.Count) return;
+        //        if ((index + 1) % 2 == 0) Console.WriteLine(list[index]);
+        //        Print(index + 1);
+        //    }
+        //    Print(0);
+        //}
+
         public static void PrintOnlyEvenElements<T>(List<T> list) // поправил "одна проверка лишняя"
         {
             void Print(int index)
             {
                 if (index + 1 > list.Count) return;
-                if ((index + 1) % 2 == 0) Console.WriteLine(list[index]);
-                Print(index + 1);
+                Console.WriteLine(list[index]);
+                Print(index + 2);
             }
-            Print(0);
+            Print(1);
         }
 
         // Нахождение второго максимального числа в списке (с учетом, что максимальных может быть несколько)
