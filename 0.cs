@@ -1,74 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-
-using static AlgorithmsDataStructures.Recursion;
 
 namespace AlgorithmsDataStructures
 {
-    public static class Program
-    {
-        public static void Main()
-        {
-            //Logger.Add($"{RaiseDigitToDegree(1, 5)}");
-            //Logger.Add($"{RaiseDigitToDegree(0, 5)}");
-            //Logger.Add($"{RaiseDigitToDegree(5, 0)}");
-            //Logger.Add($"{RaiseDigitToDegree(5, 3)}");
-            //Logger.Add($"{RaiseDigitToDegree(10, -1)}");
-            //Logger.Add("");
-            //Logger.Add("");
-            //Logger.Add($"{CalcSumOfDigits(1234)}");
-            //Logger.Add($"{CalcSumOfDigits(12340)}");
-            //Logger.Add($"{CalcSumOfDigits(0)}");
-            //Logger.Add($"{CalcSumOfDigits(1)}");
-            //Logger.Add($"{CalcSumOfDigits(10000)}");
-            //Logger.Add("");
-            //Logger.Add("");
-            //var list = new LinkedList<int>();
-            //list.AddLast(0);
-            //list.AddLast(8);
-            //list.AddLast(3);
-            //list.AddLast(9);
-            //list.AddLast(22);
-            //Logger.Add($"{CalcLengthOfList(list)}");
-            //Logger.Add("");
-            //Logger.Add("");
-            //Logger.Add($"{IsPalindrome("0131 0")}");
-            //Logger.Add("");
-            //Logger.Add("");
-            //Console.WriteLine("PrintOnlyEvenDigits");
-            //Console.WriteLine("");
-            //PrintOnlyEvenDigits(new List<int>() { 0, 8, 22, 3, 9 });
-            //Logger.Add("");
-            //Logger.Add("");
-            //Console.WriteLine("");
-            //Console.WriteLine("PrintOnlyEvenElements");
-            //Console.WriteLine("");
-            //PrintOnlyEvenElements(new List<int>() { 0, 8, 22, 3, 9 });
-            //Logger.Add("");
-            //Logger.Add("");
-
-            //var list2 = new List<int>() { 4, 4, 5 };
-            //foreach (var e in FindSecondMaxValues(list2))
-            //{
-            //    Logger.Add($"{e}");
-            //}
-
-            Logger.Add($"{FindSecondMaxValue(new List<int>() {  7, 10, 4, 3 })}");
-
-            //var paths = RecursiveFileSearch(@"C:\Users\soqohm\Desktop\Бобр");
-            //foreach (var e in paths)
-            //{
-            //    Logger.Add($"{e}");
-            //}
-
-            //Console.ReadKey();
-            Logger.Save(true);
-        }
-    }
-
     public static class Recursion
     {
         // Возведение числа N в степень M
@@ -236,91 +171,6 @@ namespace AlgorithmsDataStructures
             }
             Find(startPath);
             return files;
-        }
-    }
-
-    public static class Logger
-    {
-        static readonly List<string> Head;
-        static readonly List<string> Tail;
-
-        static Logger()
-        {
-            Head = new List<string>();
-            Tail = new List<string>();
-        }
-
-        static List<string> FirstSpace
-        {
-            get
-            {
-                if (Head.Any())
-                    return new List<string>() { Environment.NewLine };
-                return new List<string>();
-            }
-        }
-
-        static List<string> SecondSpace
-        {
-            get
-            {
-                if (Tail.Any())
-                    return new List<string>() { Environment.NewLine };
-                return new List<string>();
-            }
-        }
-
-        public static string DefaultPath
-        {
-            get
-            {
-                return $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\{"! logs.log"}";
-            }
-        }
-
-        static IEnumerable<string> ResultLog
-        {
-            get
-            {
-                return FirstSpace
-                    .Concat(Head)
-                    .Concat(SecondSpace)
-                    .Concat(Tail);
-            }
-        }
-
-        public static void AddToHead(string line)
-        {
-            Head.Add(line);
-        }
-
-        public static void Add(string line)
-        {
-            Tail.Add(line);
-        }
-
-        public static void Save(bool showLog)
-        {
-            WriteTo(DefaultPath);
-
-            Head.Clear();
-            Tail.Clear();
-
-            if (showLog) OpenLog();
-        }
-
-        static void WriteTo(string path)
-        {
-            if (ResultLog.FirstOrDefault() == null) return;
-            if (File.Exists(path))
-                File.Delete(path);
-            File.AppendAllLines(path, ResultLog);
-        }
-
-        public static void OpenLog()
-        {
-            if (File.Exists(DefaultPath))
-                Process.Start("notepad.exe", DefaultPath);
         }
     }
 }
