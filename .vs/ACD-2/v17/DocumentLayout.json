@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\SablukovDV\\Documents\\GitHub\\ACD-2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E93299DD-157F-4DAA-B3AE-9C48E60CFC3B}|ACD-2.csproj|c:\\users\\sablukovdv\\documents\\github\\acd-2\\0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E93299DD-157F-4DAA-B3AE-9C48E60CFC3B}|ACD-2.csproj|solutionrelative:0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "0.cs",
+              "DocumentMoniker": "C:\\Users\\SablukovDV\\Documents\\GitHub\\ACD-2\\0.cs",
+              "RelativeDocumentMoniker": "0.cs",
+              "ToolTip": "C:\\Users\\SablukovDV\\Documents\\GitHub\\ACD-2\\0.cs",
+              "RelativeToolTip": "0.cs",
+              "ViewState": "AQIAAJkAAAAAAAAAAAAmwAEAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-18T02:54:56.516Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

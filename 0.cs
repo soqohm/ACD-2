@@ -102,7 +102,7 @@ namespace AlgorithmsDataStructures
 
         // Нахождение второго максимального числа в списке (с учетом, что максимальных может быть несколько)
 
-        //public static List<int> FindSecondMaxValues(List<int> list) // предыдущая версия
+        //public static List<int> FindSecondMaxValues(List<int> list) // предыдущая версия 1
         //{
         //    var maxValues = new List<int>();
         //    var secondMaxValues = new List<int>();
@@ -136,10 +136,32 @@ namespace AlgorithmsDataStructures
         //        secondMaxValues = new List<int>() { value };
         //}
 
-        public static int? FindSecondMaxValue(List<int> list) // поправил "как-то вы усложнили"
+        //public static int? FindSecondMaxValue(List<int> list) // предыдущая версия 2
+        //{
+        //    var max = int.MinValue;
+        //    var secondMax = int.MinValue;
+
+        //    void Find(int index)
+        //    {
+        //        if (index + 1 > list.Count) return;
+        //        if (list[index] > max)
+        //        {
+        //            secondMax = max;
+        //            max = list[index];
+        //        }
+        //        else if (list[index] > secondMax)
+        //            secondMax = list[index];
+        //        Find(index + 1);
+        //    }
+        //    Find(0);
+        //    return secondMax == int.MinValue ? (int?)null : secondMax;
+        //}
+
+        public static int? FindSecondMaxValue(List<int> list) // поправил "не брать краевые константы"
         {
-            var max = int.MinValue;
-            var secondMax = int.MinValue;
+            if (list.Count < 2) return null;
+            var max = Math.Max(list[0], list[1]);
+            var secondMax = Math.Min(list[0], list[1]);
 
             void Find(int index)
             {
@@ -153,24 +175,33 @@ namespace AlgorithmsDataStructures
                     secondMax = list[index];
                 Find(index + 1);
             }
-            Find(0);
-            return secondMax == int.MinValue ? (int?)null : secondMax;
+            Find(2);
+            return secondMax;
         }
 
         // Поиск всех файлов в заданном каталоге по всей иерархии вниз
-        public static List<string> RecursiveFileSearch(string startPath)
-        {
-            var files = new List<string>();
-            if (!Directory.Exists(startPath)) return files;
 
-            void Find(string path)
-            {
-                files.AddRange(Directory.GetFiles(path));
-                foreach (var e in Directory.GetDirectories(path))
-                    Find(e);
-            }
-            Find(startPath);
-            return files;
+        //public static List<string> RecursiveFileSearch(string startPath) // предыдущая версия
+        //{
+        //    var files = new List<string>();
+        //    if (!Directory.Exists(startPath)) return files;
+
+        //    void Find(string path)
+        //    {
+        //        files.AddRange(Directory.GetFiles(path));
+        //        foreach (var e in Directory.GetDirectories(path))
+        //            Find(e);
+        //    }
+        //    Find(startPath);
+        //    return files;
+        //}
+
+        public static IEnumerable<string> RecursiveFileSearch(string startPath) // поправил "сделать одной функцией"
+        {
+            foreach (var e in Directory.GetFiles(startPath))
+                yield return e;
+            foreach (var e in Directory.GetDirectories(startPath))
+                RecursiveFileSearch(e);
         }
     }
 }
