@@ -88,8 +88,7 @@ namespace AlgorithmsDataStructures2
                 var node = queue.Dequeue();
                 foreach (var e in node.Children)
                 {
-                    if (e.Children != null && e.Children.Count > 0) 
-                        queue.Enqueue(e);
+                    if (e.HasChildren) queue.Enqueue(e);
                     yield return e;
                 }
             }
