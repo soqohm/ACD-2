@@ -34,6 +34,7 @@ namespace AlgorithmsDataStructures2
 
         public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild)
         {
+            if (Root == null) return;
             NewChild.Parent = ParentNode;
             if (ParentNode.Children == null)
                 ParentNode.Children = new List<SimpleTreeNode<T>>();
@@ -42,6 +43,7 @@ namespace AlgorithmsDataStructures2
 
         public void DeleteNode(SimpleTreeNode<T> NodeToDelete)
         {
+            if (Root == null) return;
             if (NodeToDelete.Parent == null) return;
             NodeToDelete.Parent.Children.Remove(NodeToDelete);
             NodeToDelete.Parent = null;
@@ -49,18 +51,26 @@ namespace AlgorithmsDataStructures2
 
         public List<SimpleTreeNode<T>> GetAllNodes()
         {
-            return BreadthSearch().ToList();
+            if (Root == null) return null;
+            return BreadthSearch()
+                .Concat(new List<SimpleTreeNode<T>>() { Root })
+                .ToList();
         }
 
         public List<SimpleTreeNode<T>> FindNodesByValue(T val)
         {
-            return BreadthSearch()
+            if (Root == null) return null;
+            var results = BreadthSearch()
                 .Where(e => Comparer<T>.Default.Compare(e.NodeValue, val) == 0)
                 .ToList();
+            if (Comparer<T>.Default.Compare(Root.NodeValue, val) == 0)
+                results.Add(Root);
+            return results;
         }
 
         public void MoveNode(SimpleTreeNode<T> OriginalNode, SimpleTreeNode<T> NewParent)
         {
+            if (Root == null) return;
             if (OriginalNode == NewParent) return;
             var node = OriginalNode;
             OriginalNode.Parent.Children.Remove(OriginalNode);
@@ -69,17 +79,20 @@ namespace AlgorithmsDataStructures2
 
         public int Count()
         {
-            return BreadthSearch().Count();
+            if (Root == null) return 0;
+            return BreadthSearch().Count() + 1;
         }
 
         public int LeafCount()
         {
+            if (Root == null) return 0;
+            if (!Root.HasChildren) return 1;
             return BreadthSearch()
                 .Where(e => !e.HasChildren)
                 .Count();
         }
 
-        IEnumerable<SimpleTreeNode<T>> BreadthSearch() 
+        IEnumerable<SimpleTreeNode<T>> BreadthSearch()
         {
             var queue = new Queue<SimpleTreeNode<T>>();
             if (Root is object && Root.Children != null) queue.Enqueue(Root);
