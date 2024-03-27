@@ -294,5 +294,76 @@ namespace AlgorithmsDataStructures2
 
             return nodes;
         }
+
+        public List<BSTNode<T>> WideAllNodes()
+        {
+            var wideList = new List<BSTNode<T>>();
+            var nodesQueue = new Queue<BSTNode<T>>();
+            var node = Root;
+            nodesQueue.Enqueue(Root);
+
+            if (Root != null)
+            {
+                while (nodesQueue.Count > 0)
+                {
+                    node = nodesQueue.Dequeue();
+                    wideList.Add(node);
+
+                    if (node.LeftChild != null)
+                        nodesQueue.Enqueue(node.LeftChild);
+                    if (node.RightChild != null)
+                        nodesQueue.Enqueue(node.RightChild);
+                }
+                return wideList;
+            }
+            return null;
+        }
+
+        public List<BSTNode<T>> DeepAllNodes(int Order)
+        {
+            return DeepTraversing(Root, Order);
+        }
+
+        public List<BSTNode<T>> DeepTraversing(BSTNode<T> FromNode, int Order)
+        {
+            var deepList = new List<BSTNode<T>>();
+            var node = FromNode;
+
+            if (node != null)
+            {
+                switch (Order)
+                {
+                    case 0:
+                        {
+                            deepList.AddRange(DeepTraversing(node.LeftChild, Order));
+                            deepList.Add(node);
+                            deepList.AddRange(DeepTraversing(node.RightChild, Order));
+
+                            break;
+                        }
+
+                    case 1:
+                        {
+                            deepList.AddRange(DeepTraversing(node.LeftChild, Order));
+                            deepList.AddRange(DeepTraversing(node.RightChild, Order));
+                            deepList.Add(node);
+
+                            break;
+                        }
+
+                    case 2:
+                        {
+                            deepList.Add(node);
+                            deepList.AddRange(DeepTraversing(node.LeftChild, Order));
+                            deepList.AddRange(DeepTraversing(node.RightChild, Order));
+                            break;
+                        }
+
+                    default:
+                        return null;
+                }
+            }
+            return deepList;
+        }
     }
 }
