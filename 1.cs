@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AlgorithmsDataStructures2
+namespace AlgorithmsDataStructures21
 {
     public class SimpleTreeNode<T>
     {

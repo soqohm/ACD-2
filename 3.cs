@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AlgorithmsDataStructures22
+namespace AlgorithmsDataStructures2
 {
-    public class BSTNode<T>
+    public class BSTNode
     {
         public int NodeKey; // ключ узла
-        public T NodeValue; // значение в узле
-        public BSTNode<T> Parent; // родитель или null для корня
-        public BSTNode<T> LeftChild; // левый потомок
-        public BSTNode<T> RightChild; // правый потомок	
+        public int NodeValue; // значение в узле
+        public BSTNode Parent; // родитель или null для корня
+        public BSTNode LeftChild; // левый потомок
+        public BSTNode RightChild; // правый потомок	
 
-        public BSTNode(int key, T val, BSTNode<T> parent)
+        public BSTNode(int key, int val, BSTNode parent)
         {
             NodeKey = key;
             NodeValue = val;
@@ -21,10 +21,10 @@ namespace AlgorithmsDataStructures22
         }
     }
 
-    public class BSTFind<T>
+    public class BSTFind
     {
         // null если в дереве вообще нету узлов
-        public BSTNode<T> Node;
+        public BSTNode Node;
 
         // true если узел найден
         public bool NodeHasKey;
@@ -35,20 +35,20 @@ namespace AlgorithmsDataStructures22
         public BSTFind() { Node = null; }
     }
 
-    public class BST<T>
+    public class BST
     {
-        BSTNode<T> Root; // корень дерева, или null
+        BSTNode Root; // корень дерева, или null
 
-        public BST(BSTNode<T> node)
+        public BST(BSTNode node)
         {
             Root = node;
         }
 
-        public BSTFind<T> FindNodeByKey(int key)
+        public BSTFind FindNodeByKey(int key)
         {
             if (Root == null) return null;
             var node = Root;
-            var search = new BSTFind<T>();
+            var search = new BSTFind();
 
             while (search.NodeHasKey == true || search.NodeHasKey == false)
             {
@@ -87,16 +87,16 @@ namespace AlgorithmsDataStructures22
             return search;
         }
 
-        public bool AddKeyValue(int key, T val)
+        public bool AddKeyValue(int key, int val)
         {
-            if (Root == null) 
-                Root = new BSTNode<T>(key, val, null);
+            if (Root == null)
+                Root = new BSTNode(key, val, null);
             else
             {
                 var node = FindNodeByKey(key);
                 if (node.NodeHasKey == false)
                 {
-                    var newNode = new BSTNode<T>(key, val, node.Node);
+                    var newNode = new BSTNode(key, val, node.Node);
                     if (node.ToLeft == true)
                     {
                         node.Node.LeftChild = newNode;
@@ -113,7 +113,7 @@ namespace AlgorithmsDataStructures22
             return true;
         }
 
-        public BSTNode<T> FinMinMax(BSTNode<T> FromNode, bool FindMax)
+        public BSTNode FinMinMax(BSTNode FromNode, bool FindMax)
         {
             var node = FromNode;
 
@@ -138,7 +138,7 @@ namespace AlgorithmsDataStructures22
         {
             var foundNode = FindNodeByKey(key);
             var Node = foundNode.Node;
-            BSTNode<T> successorNode;
+            BSTNode successorNode;
 
             if (foundNode.NodeHasKey == true)
             {
@@ -283,9 +283,9 @@ namespace AlgorithmsDataStructures22
             return 0;
         }
 
-        public List<BSTNode<T>> GetAllNodes(BSTNode<T> Root)
+        public List<BSTNode> GetAllNodes(BSTNode Root)
         {
-            var nodes = new List<BSTNode<T>> { Root };
+            var nodes = new List<BSTNode> { Root };
 
             if (Root.LeftChild != null)
                 nodes.AddRange(GetAllNodes(Root.LeftChild));
@@ -293,6 +293,77 @@ namespace AlgorithmsDataStructures22
                 nodes.AddRange(GetAllNodes(Root.RightChild));
 
             return nodes;
+        }
+
+        public List<BSTNode> WideAllNodes()
+        {
+            var wideList = new List<BSTNode>();
+            var nodesQueue = new Queue<BSTNode>();
+            var node = Root;
+            nodesQueue.Enqueue(Root);
+
+            if (Root != null)
+            {
+                while (nodesQueue.Count > 0)
+                {
+                    node = nodesQueue.Dequeue();
+                    wideList.Add(node);
+
+                    if (node.LeftChild != null)
+                        nodesQueue.Enqueue(node.LeftChild);
+                    if (node.RightChild != null)
+                        nodesQueue.Enqueue(node.RightChild);
+                }
+                return wideList;
+            }
+            return null;
+        }
+
+        public List<BSTNode> DeepAllNodes(int Order)
+        {
+            return DeepTraversing(Root, Order);
+        }
+
+        public List<BSTNode> DeepTraversing(BSTNode FromNode, int Order)
+        {
+            var deepList = new List<BSTNode>();
+            var node = FromNode;
+
+            if (node != null)
+            {
+                switch (Order)
+                {
+                    case 0:
+                        {
+                            deepList.AddRange(DeepTraversing(node.LeftChild, Order));
+                            deepList.Add(node);
+                            deepList.AddRange(DeepTraversing(node.RightChild, Order));
+
+                            break;
+                        }
+
+                    case 1:
+                        {
+                            deepList.AddRange(DeepTraversing(node.LeftChild, Order));
+                            deepList.AddRange(DeepTraversing(node.RightChild, Order));
+                            deepList.Add(node);
+
+                            break;
+                        }
+
+                    case 2:
+                        {
+                            deepList.Add(node);
+                            deepList.AddRange(DeepTraversing(node.LeftChild, Order));
+                            deepList.AddRange(DeepTraversing(node.RightChild, Order));
+                            break;
+                        }
+
+                    default:
+                        return null;
+                }
+            }
+            return deepList;
         }
     }
 }

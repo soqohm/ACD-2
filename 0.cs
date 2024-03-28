@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace AlgorithmsDataStructures
+namespace AlgorithmsDataStructures20
 {
     public static class Recursion
     {
